@@ -1,29 +1,24 @@
+// Statistics.jsx
 import React from 'react';
+import StatisticLine from './StatisticLine'; // Check this path
 
-const Statistics = ({ good, neutral, bad }) => {
-  // Lasketaan yhteenlaskettu määrä
-  const total = good + neutral + bad;
-
-  // Lasketaan keskiarvo
-  const average = total === 0 ? 0 : (good - bad) / total;
-
-  // Lasketaan positiivisen palautteen prosenttiosuus
-  const positivePercentage = total === 0 ? 0 : (good / total) * 100;
-
+const Statistics = ({ good, neutral, bad, total, average, positivePercentage }) => {
   return (
     <div>
       <h2>Statistics</h2>
       {total === 0 ? (
         <p>No feedback given</p>
       ) : (
-        <div>
-          <p>Good: {good}</p>
-          <p>Neutral: {neutral}</p>
-          <p>Bad: {bad}</p>
-          <p>Total: {total}</p>
-          <p>Average: {average.toFixed(1)}</p>
-          <p>Positive: {positivePercentage.toFixed(1)}%</p>
-        </div>
+        <table>
+          <tbody>
+            <StatisticLine text="Good" value={good} />
+            <StatisticLine text="Neutral" value={neutral} />
+            <StatisticLine text="Bad" value={bad} />
+            <StatisticLine text="Total" value={total} />
+            <StatisticLine text="Average" value={average.toFixed(1)} />
+            <StatisticLine text="Positive" value={`${positivePercentage.toFixed(1)}%`} />
+          </tbody>
+        </table>
       )}
     </div>
   );
